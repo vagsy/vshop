@@ -28,7 +28,7 @@ const mutations = {
       state.orderList = payload
     },
     updateParams (state, {key, val}) {
-      state.params[payload.key] = val
+      state.params[key] = val
       console.log(state.params)
     }
 }

@@ -8,6 +8,11 @@
       </div>
 
       <div class="order-list-option">
+        选择产品2：
+        <v-selection :selections="products" @on-change="productChange"></v-selection>
+      </div>
+
+      <div class="order-list-option">
         开始日期：
         <v-date-picker @on-change="getStartDate"></v-date-picker>
       </div>
@@ -103,15 +108,15 @@ export default {
       // tableData: []
     }
   },
+  computed: {
+    tableData () {
+      return this.$store.getters.getOrderList
+    }
+  },
   watch: {
     query () {
       this.getList()
     }
-  },
-  computed: {
-      tableData () {
-        return this.$store.getters.getOrderList
-      }
   },
   methods: {
     productChange (obj) {
@@ -119,6 +124,7 @@ export default {
         key: 'productId',
         val: obj.value
       })
+      this.$store.dispatch('fetchOrderList')
       // this.productId = obj.value
       // this.getList()
     },
